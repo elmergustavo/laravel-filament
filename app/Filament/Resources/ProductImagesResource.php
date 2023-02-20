@@ -12,7 +12,8 @@ use Filament\Resources\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-
+use Filament\Tables\Columns\TextColumn;
+use Filament\Forms\Components\TextInput;
 class ProductImagesResource extends Resource
 {
     protected static ?string $model = ProductImages::class;
@@ -23,7 +24,8 @@ class ProductImagesResource extends Resource
     {
         return $form
             ->schema([
-                //
+                TextInput::make('Name'),
+                TextInput::make('URL')->activeUrl(),
             ]);
     }
 
@@ -31,7 +33,8 @@ class ProductImagesResource extends Resource
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('Name')->sortable()->searchable(),
+                TextColumn::make('URL')->sortable()->searchable(),
             ])
             ->filters([
                 //
