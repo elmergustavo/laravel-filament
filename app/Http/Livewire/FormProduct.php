@@ -7,11 +7,11 @@ use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Livewire\Component;
 
-class FormProduct extends Component implements  HasForms
+class FormProduct extends Component implements HasForms
 {
     use InteractsWithForms;
 
-    public $name ;
+    public $name;
     public $price;
     public $description;
     public $stock;
@@ -20,11 +20,16 @@ class FormProduct extends Component implements  HasForms
     protected function getFormSchema(): array
     {
         return [
-            TextInput::make('name')->required(),
+            TextInput::make('name')->required()->helperText("nombre del product"),
             TextInput::make('price'),
             TextInput::make('description'),
             TextInput::make('stock'),
         ];
+    }
+
+    public function register(): void
+    {
+       dd($this->form->getState());
     }
 
     public function render()
