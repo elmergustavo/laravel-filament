@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Livewire\FormProduct;
+use App\Http\Livewire\ListProducts;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,6 +22,7 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', FormProduct::class)->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard/listProduct', ListProducts::class)->middleware(['auth', 'verified'])->name('dashboard/listProduct');
 
 // Route::get('/dashboard', [ProductController::class, 'home'])->middleware(['auth', 'verified'])->name('dashboard');
 
