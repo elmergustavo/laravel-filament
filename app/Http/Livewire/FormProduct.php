@@ -31,7 +31,7 @@ class FormProduct extends Component implements HasForms
             TextInput::make('description'),
             TextInput::make('price'),
             TextInput::make('stock'),
-            TextInput::make('user_id')->default(Auth::id()),
+            TextInput::make('user_id')->default(auth()->user()->id),
            
       
         ];

@@ -36,6 +36,7 @@ class ListProducts extends Component implements HasTable
                 TextColumn::make('description')->sortable()->searchable(),
                 TextColumn::make('price')->sortable()->searchable(),
                 TextColumn::make('stock')->sortable()->searchable(),
+                TextColumn::make('user->name')->sortable()->searchable(),
             
         ];
     }
