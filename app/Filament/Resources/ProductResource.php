@@ -15,6 +15,7 @@ use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Auth;
 
 class ProductResource extends Resource
 {
@@ -31,6 +32,7 @@ class ProductResource extends Resource
                     ->schema([
 
                         TextInput::make('name'),
+                        TextInput::make('user_id')->default(Auth::id()),
                         TextInput::make('description'),
                         TextInput::make('price'),
                         TextInput::make('stock'),
