@@ -27,11 +27,13 @@ class FormProduct extends Component implements HasForms
     protected function getFormSchema(): array
     {
         return [
-            TextInput::make('name')->required()->helperText("nombre del product")->maxLength(15),
+            //TextInput::make('name')->required()->helperText("nombre del product")->maxLength(15),
+            TextInput::make('name')->required()->maxLength(15),
             TextInput::make('description'),
             TextInput::make('price'),
             TextInput::make('stock'),
             TextInput::make('user_id')->default(auth()->user()->id),
+            //TextInput::make('user_name')->default(auth()->user()->name),
            
       
         ];
