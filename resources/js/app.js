@@ -6,7 +6,11 @@ import NotificationsAlpinePlugin from '../../vendor/filament/notifications/dist/
 Alpine.plugin(AlpineFloatingUI)
 Alpine.plugin(FormsAlpinePlugin)
 Alpine.plugin(NotificationsAlpinePlugin)
+Alpine.plugin(focus)
+
 
 window.Alpine = Alpine
 
 Alpine.start()
+
+
