@@ -25,7 +25,6 @@ services:
             - mysql
             - redis
             - meilisearch
-            - mailpit
             - selenium
     mysql:
         image: 'mysql/mysql-server:8.0'
@@ -66,6 +65,23 @@ services:
                 - ping
             retries: 3
             timeout: 5s
+    
+    mailhog:
+        image: 'mailhog/mailhog:latest'
+        ports:
+            - '${FORWARD_MAILHOG_PORT:-1025}:1025'
+            - '${FORWARD_MAILHOG_DASHBOARD_PORT:-8025}:8025'
+        networks:
+            - sail
+
+    # mailhog:
+    #   image: mailhog/mailhog
+    #   container_name: "${PROJECT_NAME}_mailhog"
+    #   labels:
+    #     - "traefik.http.services.${PROJECT_NAME}_mailhog.loadbalancer.server.port=8025"
+    #     - "traefik.http.routers.${PROJECT_NAME}_mailhog.rule=Host(`mailhog.${PROJECT_BASE_URL}`)"
+    
+    
     meilisearch:
         image: 'getmeili/meilisearch:latest'
         ports:
@@ -83,13 +99,13 @@ services:
                 - 'http://localhost:7700/health'
             retries: 3
             timeout: 5s
-    mailpit:
-        image: 'axllent/mailpit:latest'
-        ports:
-            - '${FORWARD_MAILPIT_PORT:-1025}:1025'
-            - '${FORWARD_MAILPIT_DASHBOARD_PORT:-8025}:8025'
-        networks:
-            - sail
+    # mailpit:
+    #     image: 'axllent/mailpit:latest'
+    #     ports:
+    #         - '${FORWARD_MAILPIT_PORT:-1025}:1025'
+    #         - '${FORWARD_MAILPIT_DASHBOARD_PORT:-8025}:8025'
+    #     networks:
+    #         - sail
     selenium:
         image: selenium/standalone-chrome
         extra_hosts:
@@ -99,6 +115,8 @@ services:
         networks:
             - sail
 networks:
+    docker_workspace_network:
+        driver: bridge
     sail:
         driver: bridge
 volumes:
