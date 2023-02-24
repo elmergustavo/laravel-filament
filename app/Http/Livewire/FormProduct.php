@@ -29,6 +29,7 @@ class FormProduct extends Component implements HasForms
         return [
             //TextInput::make('name')->required()->helperText("nombre del product")->maxLength(15),
             TextInput::make('name')->required()->maxLength(15),
+
             TextInput::make('description'),
             TextInput::make('price'),
             TextInput::make('stock'),
