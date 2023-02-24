@@ -10,8 +10,9 @@ use Filament\Forms\Contracts\HasForms;
 use Filament\Notifications\Notification;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use LivewireUI\Modal\ModalComponent;
 
-class FormProduct extends Component implements HasForms
+class FormProduct extends ModalComponent implements HasForms
 {
     use InteractsWithForms;
 
@@ -29,7 +30,6 @@ class FormProduct extends Component implements HasForms
         return [
             //TextInput::make('name')->required()->helperText("nombre del product")->maxLength(15),
             TextInput::make('name')->required()->maxLength(15),
-
             TextInput::make('description'),
             TextInput::make('price'),
             TextInput::make('stock'),

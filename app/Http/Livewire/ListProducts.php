@@ -8,9 +8,14 @@ use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
+use Filament\Forms\Components\MarkdownEditor;
+use Filament\Forms\Components\TextInput;
 use Illuminate\Contracts\Database\Eloquent\Builder as EloquentBuilder;
 use Livewire\Component;
+use Filament\Forms;
 use App\Models\Product;
+use Filament\Forms\Components\Actions\Modal\Actions\Action;
+use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Filters\SelectFilter;
 
 
@@ -37,16 +42,13 @@ class ListProducts extends Component implements HasTable
             TextColumn::make('price')->sortable()->searchable(),
             TextColumn::make('stock')->sortable()->searchable(),
             TextColumn::make('user.name')->sortable()->searchable(),
-            //TextColumn::make('User Name')->sortable()->searchable(),
-            //TextColumn::make('user->name')->sortable()->searchable(),
-
         ];
     }
 
     protected function getTableFilters(): array
     {
         return [
-            SelectFilter::make('Aaa')->relationship('user', 'email'),
+            SelectFilter::make('Filter Email')->relationship('user', 'email'),
 
         ];
     }
@@ -54,15 +56,30 @@ class ListProducts extends Component implements HasTable
     protected function getTableActions(): array
     {
         return [
-            EditAction::make(),
+            EditAction::make()->mountUsing(function (Forms\ComponentContainer $form, \App\Models\Product $record) {
+                $mount_data = $record->toArray();
+                //$mount_data['user_id'] = 2132132;
+                $form->fill($mount_data);
+            })->form(function(\App\Http\Livewire\FormProduct $form){
+                return [
+                    TextInput::make('name')->required()->maxLength(15),
+                    TextInput::make('description'),
+                    TextInput::make('price'),
+                    TextInput::make('stock'),
+                    TextInput::make('user_id')->default(auth()->user()->id),
+                   
+              
+                ];
+            }),
             DeleteAction::make(),
-            // DeleteBulkAction::make(),
         ];
     }
 
     protected function getTableBulkActions(): array
     {
-        return [];
+        return [
+            DeleteBulkAction::make(),
+        ];
     }
 
     public function render()
@@ -70,3 +87,4 @@ class ListProducts extends Component implements HasTable
         return view('livewire.list-products');
     }
 }
+

@@ -8,6 +8,9 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <!-- Alpine Plugins -->
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/focus@3.x.x/dist/cdn.min.js"></script>
+
     <title>{{ config('app.name') }}</title>
     <style>
         [x-cloak] {
@@ -27,8 +30,9 @@
             <h1 class="text-3xl font-black">Filament</h1>
 
             <nav class="flex gap-2 items-center">
-                <a class="font-bold uppercase text-gray-600 text-sm" href="{{route('dashboard')}}">Crear productos</a>
-                <a class="font-bold uppercase text-gray-600 text-sm" href="{{route('dashboard/listProduct')}}">Listar Productos</a>
+                <a class="font-bold uppercase text-gray-600 text-sm" href="{{ route('dashboard') }}">Crear productos</a>
+                <a class="font-bold uppercase text-gray-600 text-sm" href="{{ route('dashboard/listProduct') }}">Listar
+                    Productos</a>
             </nav>
 
         </div>
@@ -38,11 +42,11 @@
     <section class="container mx-auto">
         {{ $slot }}
     </section>
- 
+
 
     <footer class="mt-10 text-center p-5 text-gray-500 font-bold uppercase">
         Filament - 🐫
-        {{now()->format('Y')}}
+        {{ now()->format('Y') }}
     </footer>
 
     @livewire('notifications')
