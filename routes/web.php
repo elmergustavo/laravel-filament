@@ -21,8 +21,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', FormProduct::class)->middleware(['auth', 'verified'])->name('dashboard');
-Route::get('/dashboard/listProduct', ListProducts::class)->middleware(['auth', 'verified'])->name('dashboard/listProduct');
+Route::get('/dashboard', ListProducts::class)->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard/listProduct', )->middleware(['auth', 'verified'])->name('dashboard/listProduct');
 
 // Route::get('/dashboard', [ProductController::class, 'home'])->middleware(['auth', 'verified'])->name('dashboard');
 
