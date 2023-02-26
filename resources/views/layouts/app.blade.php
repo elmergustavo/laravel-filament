@@ -23,9 +23,28 @@
     @stack('scripts')
 </head>
 
-<body class="antialiased bg-gray-100">
+<body class="font-sans antialiased">
 
-    <header class="p-5 border-b bg-white shadow ">
+
+    <div class="min-h-screen bg-gray-100">
+        @include('layouts.navigation')
+
+        <!-- Page Heading -->
+        @if (isset($header))
+            <header class="bg-white shadow">
+                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                    {{ $header }}
+                </div>
+            </header>
+        @endif
+
+        <!-- Page Content -->
+        <main class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            {{ $slot }}
+        </main>
+    </div>
+
+    {{-- <header class="p-5 border-b bg-white shadow ">
         <div class="container mx-auto flex justify-between items-center">
             <h1 class="text-3xl font-black">Filament</h1>
 
@@ -37,12 +56,11 @@
 
         </div>
 
-    </header>
+    </header> --}}
 
-    <section class="container mx-auto">
+    {{-- <section class="container mx-auto">
         {{ $slot }}
-    </section>
-
+    </section> --}}
 
     <footer class="mt-10 text-center p-5 text-gray-500 font-bold uppercase">
         Filament - 🐫

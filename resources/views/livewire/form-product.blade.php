@@ -18,7 +18,10 @@
         <div class="  max-w-lg  bg-white">
             {{ $this->form }}
             <button type="submit"
-                class="text-white mt-5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                class="flex mt-4 justify-center w-full text-center  items-center px-4 py-2 bg-indigo-800 border
+                border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700
+                focus:bg-indigo-700 active:bg-indigo-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2
+                transition ease-in-out duration-150">
                 Crear Producto
             </button>
 
