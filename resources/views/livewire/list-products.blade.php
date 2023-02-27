@@ -10,5 +10,7 @@
             Producto</button>
     </div>
 
+    
+ 
     {{ $this->table }}
 </div>
