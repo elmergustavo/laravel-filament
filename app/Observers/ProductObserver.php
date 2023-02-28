@@ -12,19 +12,12 @@ class ProductObserver
      * Handle the Product "created" event.
      */
     public function created(Product $product): void
-    {
-       // Log::alert($product->user);
-        
-        //dd($product->user_id=auth()->product()->id);
-        
-            $details['email'] = $product->user->email;
-            $details['name'] = $product->user->name;
-            $details['product_id'] = $product->id;
-            dispatch(new SendEmailJob($details));
-            
+    {             
+            $details['email_id'] = $product->user_id;
 
-        
-        
+            //$details['email_id'] = $product->user->email;            
+            $details['product_id'] = $product->id;
+            dispatch(new SendEmailJob($details));//->delay(now()->addMinutes(1));;        
     }
 
     /**

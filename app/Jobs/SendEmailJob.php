@@ -8,11 +8,12 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use App\Mail\SendEmailTest;
-use Mail;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Mail\Mailables\Address;
-use Illuminate\Mail\Mailables\Envelope;
 use App\Models\Product;
+use App\Models\User;
+use App\Notifications\SendNotifiEmail;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Notification;
 
 class SendEmailJob implements ShouldQueue
 {
@@ -38,18 +39,20 @@ class SendEmailJob implements ShouldQueue
      */
     public function handle()
     {
-        $producto=Product::find($this->details['product_id']);
-        Log::alert( $producto);
-        $email = new SendEmailTest($producto);
+        // $producto = Product::find($this->details['product_id']);
+        // Log::alert($producto);
+        // $email = new SendEmailTest($producto);
+        // Mail::to($this->details['email'])->send($email);
+        
 
-      
-         Mail::to($this->details['email'])->send($email);
-        // return new Envelope(
-        //     from: new Address('example@gmail.com', 'Jeffrey Way'),
-        //     replyTo: [
-        //         new Address($this->details['email'], $this->details['name']),
-        //     ],
-        //     subject: 'Producto creado',
-        // );
+
+        $user = User::find($this->details['email_id']); 
+        $product = Product::find($this->details['product_id']);  
+
+       
+        Log::alert($user);
+        Log::alert($product);
+        Notification::send($user, new SendNotifiEmail($product));
+
     }
 }
