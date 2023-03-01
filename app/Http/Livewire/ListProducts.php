@@ -94,17 +94,17 @@ class ListProducts extends Component implements HasTable
             
             DeleteAction::make(),
 
-            TablesActionsCreateAction::make()->form(function(\App\Http\Livewire\FormProduct $form){
-                return [
-                    TextInput::make('name')->required()->maxLength(15),
-                    TextInput::make('description'),
-                    TextInput::make('price'),
-                    TextInput::make('stock'),
-                    TextInput::make('user_id')->default(auth()->user()->id),
+            // TablesActionsCreateAction::make()->form(function(\App\Http\Livewire\FormProduct $form){
+            //     return [
+            //         TextInput::make('name')->required()->maxLength(15),
+            //         TextInput::make('description'),
+            //         TextInput::make('price'),
+            //         TextInput::make('stock'),
+            //         TextInput::make('user_id')->default(auth()->user()->id),
                    
               
-                ];
-            }   ),
+            //     ];
+            // }   ),
           
         ];
     }
