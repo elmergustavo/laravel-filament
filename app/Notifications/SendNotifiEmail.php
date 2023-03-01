@@ -32,12 +32,16 @@ class SendNotifiEmail extends Notification implements ShouldQueue
      */
     public function toMail(): MailMessage {
 
+        $url = url('/product/'. $this->product->id);
+
+
         return (new MailMessage)
             ->greeting('Hello!')
             ->line('Nombre del Producto: '.  $this->product->name)
             ->line('descripcion del Producto: '.  $this->product->description)
             ->line('Stock del Producto: '.  $this->product->stock)
             ->line('Precio del Producto: '.  $this->product->price)
+            ->action('View Invoice', $url)
             ->line('Producto creado exitosamente');
     }
 

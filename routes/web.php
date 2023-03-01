@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Livewire\FormProduct;
 use App\Http\Livewire\ListProducts;
+use App\Http\Livewire\ProductPreview;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -38,5 +40,8 @@ Route::get('email-test', function(){
     dispatch(new App\Jobs\SendEmailJob($details));
     dd('done');
 });
+
+Route::get('/notification', NotificationController::class)->middleware(['auth', 'verified'])->name('notification');
+Route::get('/product/{product}', [ProductPreview::class, 'index'])->middleware(['auth', 'verified'])->name('product.index');
 
 require __DIR__.'/auth.php';
