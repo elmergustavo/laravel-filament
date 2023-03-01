@@ -15,6 +15,9 @@ use Livewire\Component;
 use Filament\Forms;
 use App\Models\Product;
 use Filament\Forms\Components\Actions\Modal\Actions\Action;
+use Filament\Pages\Actions\CreateAction as ActionsCreateAction;
+use Filament\Tables\Actions\CreateAction as TablesActionsCreateAction;
+use Filament\Tables\Pages\CreateAction;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Filters\SelectFilter;
 
@@ -53,6 +56,23 @@ class ListProducts extends Component implements HasTable
         ];
     }
 
+    protected function getActions(): array
+    {
+        return [
+            ActionsCreateAction::make()->form(function(\App\Http\Livewire\FormProduct $form){
+                return [
+                    TextInput::make('name')->required()->maxLength(15),
+                    TextInput::make('description'),
+                    TextInput::make('price'),
+                    TextInput::make('stock'),
+                    TextInput::make('user_id')->default(auth()->user()->id),
+                   
+              
+                ];
+            }   ),
+        ];
+    }
+
     protected function getTableActions(): array
     {
         return [
@@ -71,7 +91,21 @@ class ListProducts extends Component implements HasTable
               
                 ];
             }),
+            
             DeleteAction::make(),
+
+            // TablesActionsCreateAction::make()->form(function(\App\Http\Livewire\FormProduct $form){
+            //     return [
+            //         TextInput::make('name')->required()->maxLength(15),
+            //         TextInput::make('description'),
+            //         TextInput::make('price'),
+            //         TextInput::make('stock'),
+            //         TextInput::make('user_id')->default(auth()->user()->id),
+                   
+              
+            //     ];
+            // }   ),
+          
         ];
     }
 

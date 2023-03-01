@@ -33,5 +33,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::get('email-test', function(){
+    $details['email'] = 'your_email@gmail.com';
+    dispatch(new App\Jobs\SendEmailJob($details));
+    dd('done');
+});
 
 require __DIR__.'/auth.php';
