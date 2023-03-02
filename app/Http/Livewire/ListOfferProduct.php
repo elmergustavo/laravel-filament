@@ -15,8 +15,8 @@ class ListOfferProduct extends Component implements Tables\Contracts\HasTable
 
     protected function getTableQuery(): Builder 
     {
-        // return Offer::with('product');
-        return Offer::query();
+        return Offer::with('offerproduct');
+        //return Offer::query();
     }   
 
     protected function getTableColumns(): array 
@@ -24,7 +24,7 @@ class ListOfferProduct extends Component implements Tables\Contracts\HasTable
         return [
             TextColumn::make('name')->sortable()->searchable(),
             TextColumn::make('price')->sortable()->searchable(),
-            TextColumn::make('')->sortable()->searchable(),
+            TextColumn::make('user.name')->sortable()->searchable(),
         ];
     }
  

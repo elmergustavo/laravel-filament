@@ -36,6 +36,6 @@ Route::get('/notification', NotificationController::class)->middleware(['auth', 
 
 Route::get('/product/{product}', [ProductPreview::class, 'index'])->middleware(['auth', 'verified'])->name('product.index');
 
-Route::get('/discount', ListOfferProduct::class)->middleware(['auth', 'verified'])->name('offer');
+Route::get('/offer', ListOfferProduct::class)->middleware(['auth', 'verified'])->name('offer');
 
 require __DIR__.'/auth.php';
