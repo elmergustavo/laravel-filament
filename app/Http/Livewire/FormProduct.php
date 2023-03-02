@@ -3,16 +3,11 @@
 namespace App\Http\Livewire;
 
 use App\Models\Product;
-use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Notifications\Notification;
-use Illuminate\Support\Facades\Auth;
-use Livewire\Component;
 use LivewireUI\Modal\ModalComponent;
-use Filament\Pages\Actions\CreateAction as ActionsCreateAction;
-use Filament\Tables\Actions\CreateAction as TablesActionsCreateAction;
 
 class FormProduct extends ModalComponent implements HasForms
 {
@@ -31,44 +26,20 @@ class FormProduct extends ModalComponent implements HasForms
     {
         return [
             //TextInput::make('name')->required()->helperText("nombre del product")->maxLength(15),
-            TextInput::make('name')->required()->maxLength(15),
-            TextInput::make('description'),
-            TextInput::make('price'),
-            TextInput::make('stock'),
+            TextInput::make('name')->required()->maxLength(15)->helperText("name of product"),
+            TextInput::make('description')->required()->helperText("description of product"),
+            TextInput::make('price')->required()->helperText("price of product")->numeric(),
+            TextInput::make('stock')->required()->helperText("stock of product")->numeric(),
             // TextInput::make('user_id')->default(auth()->user()->id),
-            //TextInput::make('user_name')->default(auth()->user()->name),
            
       
         ];
         
     }
-
-    public function mount(): void 
-    {
-        $this->form->fill();
-    } 
-
-    // public function register(): void 
-    // {
-    //     dd($this->form->getState());
-    // } 
-
-    
+   
     protected function getActions(): array
     {
-        return [
-            ActionsCreateAction::make()->form(function(\App\Http\Livewire\FormProduct $form){
-                return [
-                    TextInput::make('name')->required()->maxLength(15),
-                    TextInput::make('description'),
-                    TextInput::make('price'),
-                    TextInput::make('stock'),
-                    TextInput::make('user_id')->default(auth()->user()->id),
-                   
-              
-                ];
-            }   ),
-        ];
+        return [ ];
     }
 
 
@@ -76,10 +47,6 @@ class FormProduct extends ModalComponent implements HasForms
     {
 
         $datos =  $this->validate();
-
-        // dd($datos);
-        // Product::create($this->form->getState());
-        // // dd($this->form->getState());
 
         Product::create([
             'name' => $datos['name'],
@@ -89,13 +56,10 @@ class FormProduct extends ModalComponent implements HasForms
             'user_id' => auth()->user()->id,
         ]);
 
-
-
         Notification::make() 
         ->title('Saved successfully')
         ->success()
         ->send(); 
-
 
         $this->closeModal();
     

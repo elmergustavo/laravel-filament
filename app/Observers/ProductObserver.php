@@ -2,7 +2,6 @@
 
 namespace App\Observers;
 
-use Illuminate\Support\Facades\Log;
 use App\Models\Product;
 use App\Jobs\SendEmailJob;
 
@@ -13,11 +12,13 @@ class ProductObserver
      */
     public function created(Product $product): void
     {             
-            $details['email_id'] = $product->user_id;
-
-            //$details['email_id'] = $product->user->email;            
+            $details['email_id'] = $product->user_id;         
             $details['product_id'] = $product->id;
-            dispatch(new SendEmailJob($details));//->delay(now()->addMinutes(1));;        
+            dispatch(new SendEmailJob($details));    
+            // dispatch(new SendEmailJob($details))->onQueue('queue1')->delay(now()->addMinutes(1));
+            // dispatch(new SendEmailJob($details))->onQueue('queue2')->delay(now()->addMinutes(2));    
+            // dispatch(new SendEmailJob($details))->delay(now()->addMinutes(3));
+            
     }
 
     /**
