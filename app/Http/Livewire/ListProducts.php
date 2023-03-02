@@ -58,37 +58,28 @@ class ListProducts extends Component implements HasTable
 
     protected function getActions(): array
     {
-        return [
-            ActionsCreateAction::make()->form(function(\App\Http\Livewire\FormProduct $form){
-                return [
-                    TextInput::make('name')->required()->maxLength(15),
-                    TextInput::make('description'),
-                    TextInput::make('price'),
-                    TextInput::make('stock'),
-                    TextInput::make('user_id')->default(auth()->user()->id),                  
-              
-                ];
-            }   ),
-        ];
+        return [];
     }
 
     protected function getTableActions(): array
     {
         return [
+
             EditAction::make()->mountUsing(function (Forms\ComponentContainer $form, \App\Models\Product $record) {
                 $mount_data = $record->toArray();
-                //$mount_data['user_id'] = 2132132;
+                $mount_data['user_id'] = (auth()->user()->id);
                 $form->fill($mount_data);
-            })->form(function(\App\Http\Livewire\FormProduct $form){
-                return [
-                    TextInput::make('name')->required()->maxLength(15),
-                    TextInput::make('description'),
-                    TextInput::make('price'),
-                    TextInput::make('stock'),
-                    TextInput::make('user_id')->default(auth()->user()->id),     
-                ];
-            }),
-            
+            })
+                ->form(function () {
+
+                    return [
+                        TextInput::make('name')->required()->maxLength(15)->helperText("name of product"),
+                        TextInput::make('description')->required()->helperText("description of product"),
+                        TextInput::make('price')->required()->helperText("price of product")->numeric(),
+                        TextInput::make('stock')->required()->helperText("stock of product")->numeric(),
+                    ];
+                }),
+
             DeleteAction::make(),
 
             // TablesActionsCreateAction::make()->form(function(\App\Http\Livewire\FormProduct $form){
@@ -98,11 +89,11 @@ class ListProducts extends Component implements HasTable
             //         TextInput::make('price'),
             //         TextInput::make('stock'),
             //         TextInput::make('user_id')->default(auth()->user()->id),
-                   
-              
+
+
             //     ];
             // }   ),
-          
+
         ];
     }
 
@@ -118,4 +109,3 @@ class ListProducts extends Component implements HasTable
         return view('livewire.list-products');
     }
 }
-

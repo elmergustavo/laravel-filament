@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();           
             $table->string('name');
             $table->string('description')->nullable();
-            $table->decimal('price', 12, 4)->nullable();
+            $table->decimal('price', 12, 2)->nullable();
             $table->integer("stock")->nullable();
             $table ->foreignId('user_id')->constrained('users')->cascadeOnDelete();            
             $table->timestamps();

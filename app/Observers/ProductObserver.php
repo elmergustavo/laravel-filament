@@ -2,7 +2,6 @@
 
 namespace App\Observers;
 
-use Illuminate\Support\Facades\Log;
 use App\Models\Product;
 use App\Jobs\SendEmailJob;
 
