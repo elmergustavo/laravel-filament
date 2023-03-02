@@ -7,12 +7,10 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use App\Mail\SendEmailTest;
 use Illuminate\Support\Facades\Log;
 use App\Models\Product;
 use App\Models\User;
 use App\Notifications\SendNotifiEmail;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
 
 class SendEmailJob implements ShouldQueue
